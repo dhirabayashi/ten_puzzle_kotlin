@@ -53,4 +53,28 @@ class RationalTest {
         actual = Rational(1, 3) - Rational(1, 2)
         assertThat(actual.toString()).isEqualTo("-1/6")
     }
+
+    @Test
+    fun test_times() {
+        var actual = Rational(2, 5) * Rational(2, 3)
+        assertThat(actual.toString()).isEqualTo("4/15")
+
+        actual = Rational(-1, 4) * Rational(2, 8)
+        assertThat(actual.toString()).isEqualTo("-1/16")
+
+        actual = Rational(-3, 7) * Rational(-2, 5)
+        assertThat(actual.toString()).isEqualTo("6/35")
+    }
+
+    @Test
+    fun test_div() {
+        var actual = Rational(2, 5) / Rational(2, 3)
+        assertThat(actual.toString()).isEqualTo("3/5")
+
+        actual = Rational(-1, 4) / Rational(2, 8)
+        assertThat(actual.toString()).isEqualTo("-1/1")
+
+        actual = Rational(-3, 7) / Rational(-2, 5)
+        assertThat(actual.toString()).isEqualTo("-15/-14")
+    }
 }
