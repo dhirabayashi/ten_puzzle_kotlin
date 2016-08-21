@@ -77,4 +77,46 @@ class RationalTest {
         actual = Rational(-3, 7) / Rational(-2, 5)
         assertThat(actual.toString()).isEqualTo("-15/-14")
     }
+
+    @Test
+    fun test_div_thatIsNull() {
+        val actual = Rational(2, 5) / Rational(0, 3)
+        assertThat(actual).isNull()
+    }
+
+    @Test
+    fun test_plusNullable_notNull() {
+        val actual = Rational(2, 7).plusNullable(Rational(3, 7))
+        assertThat(actual.toString()).isEqualTo("5/7")
+    }
+
+    @Test
+    fun test_plusNullable_null() {
+        val actual = Rational(2, 7).plusNullable(null)
+        assertThat(actual).isNull()
+    }
+
+    @Test
+    fun test_minusNullable_notNull() {
+        val actual = Rational(4, 5).minusNullable(Rational(2, 7))
+        assertThat(actual.toString()).isEqualTo("18/35")
+    }
+
+    @Test
+    fun test_minusNullable_null() {
+        val actual = Rational(4, 5).minusNullable(null)
+        assertThat(actual).isNull()
+    }
+
+    @Test
+    fun test_timesNullable_notNull() {
+        val actual = Rational(2, 5).timesNullable(Rational(2, 3))
+        assertThat(actual.toString()).isEqualTo("4/15")
+    }
+
+    @Test
+    fun test_timesNullable_null() {
+        val actual = Rational(2, 5).timesNullable(null)
+        assertThat(actual).isNull()
+    }
 }

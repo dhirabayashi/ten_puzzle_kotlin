@@ -42,11 +42,29 @@ class Rational(n: Int, d: Int) {
     }
 
     /**
+     * 引数としてnullを許容する足し算
+     * @param that 足すRational
+     * @return 足し算結果。thatがnullの場合はnull
+     */
+    fun plusNullable(that: Rational?): Rational? {
+        return if(that == null) null else this + that
+    }
+
+    /**
      * 引き算
      * @param that 引くRational
      * @return 引き算結果
      */
     operator fun minus(that: Rational) = this + (-that)
+
+    /**
+     * 引数としてnullを許容する引き算
+     * @param that 引くRational
+     * @return 引き算結果。thatがnullの場合はnull
+     */
+    fun minusNullable(that: Rational?): Rational? {
+        return if(that == null) null else this - that
+    }
 
     /**
      * 掛け算
@@ -61,14 +79,22 @@ class Rational(n: Int, d: Int) {
     }
 
     /**
+     * 引数としてnullを許容する掛け算
+     * @param that 掛けるRational
+     * @return 掛け算結果。thatがnullの場合はnull
+     */
+    fun timesNullable(that: Rational?): Rational? {
+        return if(that == null) null else this * that
+    }
+
+    /**
      * 割り算
      * @param that 割るRational
-     * @return 割り算結果
-     * @throws ArithmeticException thatの分子が0の場合
+     * @return 割り算結果。thatの分子が0の場合はnull
      */
-    operator fun div(that: Rational): Rational {
+    operator fun div(that: Rational): Rational? {
         if(that.numerator == 0) {
-            throw ArithmeticException("numerator of divistor is zero")
+            return null
         }
 
         val numerator = this.numerator * that.denominator
@@ -77,7 +103,16 @@ class Rational(n: Int, d: Int) {
         return Rational(numerator, denominator)
     }
 
-    override fun toString() = "${numerator}/${denominator}"
+    /**
+     * 引数としてnullを許容する割り算
+     * @param that 割るRational
+     * @return 割り算結果。thatの分子が0の場合、thatがnullの場合はnull
+     */
+    fun divNullable(that: Rational?): Rational? {
+        return if(that == null) null else this / that
+    }
+
+    override fun toString() = "$numerator/$denominator"
 
     /**
      * この分数の小数値を返す

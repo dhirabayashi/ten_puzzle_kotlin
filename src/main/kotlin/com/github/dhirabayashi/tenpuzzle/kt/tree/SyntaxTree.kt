@@ -1,7 +1,6 @@
 package com.github.dhirabayashi.tenpuzzle.kt.tree
 
 import com.github.dhirabayashi.tenpuzzle.kt.data.Rational
-import java.util.*
 
 /**
  * 構文木
@@ -29,13 +28,24 @@ sealed class SyntaxTree<T> {
     /**
      * 構文木の演算子
      */
-//    class Operator(val c: Char, val left: SyntaxTree<Rational>, val right: SyntaxTree<Rational>) : SyntaxTree<Rational>() {
+    class Operator(val c: Char, val left: SyntaxTree<Rational>, val right: SyntaxTree<Rational>) : SyntaxTree<Rational>() {
 
-//        override fun eval() {
-//            return when(c) {
-//                '+' -> left.eval()?.plus(right.eval())
-//            }
-//        }
+        private val result: Rational?
 
-//    }
+        init {
+            result = when(c) {
+                '+' -> left.eval()?.plusNullable(right.eval())
+                '-' -> left.eval()?.minusNullable(right.eval())
+                '*' -> left.eval()?.timesNullable(right.eval())
+                '/' -> left.eval()?.divNullable(right.eval())
+                else -> {
+                    throw IllegalArgumentException("illegal operator: $c")
+                }
+            }
+        }
+
+        override fun eval(): Rational? = result
+
+        override fun toString(): String = "($left$c$right)"
+    }
 }
